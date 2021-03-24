@@ -9,7 +9,7 @@ Angular version: 11.0.7
  ng serve
  ```
  
-# To run the back end (for ubunto):
+# To run the back end (for ubuntu):
 PHP version: 7.4.3
 laravel version: 4.2.3
 
