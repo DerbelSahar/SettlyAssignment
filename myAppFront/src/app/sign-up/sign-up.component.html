@@ -1,0 +1,105 @@
+
+
+<div class="container d-flex justify-content-center align-items-center"
+      style="min-height: 100vh">
+      	<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()"
+		  	class="myForm border shadow p-3 rounded validate-form" 
+      	      method="post" 
+      	      style="width: 450px;">
+      	      <h1 class="text-center p-3">Create your account</h1>
+			  
+		  <div class="mb-3">
+		    <label for="firstname" 
+		           class="form-label">First name</label>
+		    <input type="text" 
+		           class="form-control"
+				   [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" 
+		           name="firstname" 
+		           id="firstname"
+				   formControlName="firstname" required
+				   >
+				<div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+					<div *ngIf="f.firstname.errors.required">firstname is required</div>
+				</div>
+			</div>
+          <div class="mb-3">
+		    <label for="surname" 
+		           class="form-label">Surname</label>
+		    <input type="text" 
+		           class="form-control" 
+				   [ngClass]="{ 'is-invalid': submitted && f.surname.errors }"
+		           name="surname" formControlName="surname"
+		           id="surname">
+			<div *ngIf="submitted && f.surname.errors" class="invalid-feedback">
+				<div *ngIf="f.surname.errors.required">surname is required</div>
+			</div>
+		  </div>
+		  <div class="mb-3">
+		    <label for="email" 
+		           class="form-label">Email adress</label>
+		    <input type="email" 
+		           name="email" 
+		           class="form-control" 
+		           id="email" formControlName="email"
+				   [ngClass]="{ 'is-invalid': submitted && f.email.errors }" >
+			<div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+            </div>
+		  </div>
+          <div class="mb-3">
+		    <label for="confirmEmail" 
+		           class="form-label">Confirm Email adress</label>
+		    <input type="email" 
+		           name="confirmEmail" 
+		           class="form-control"
+				   [ngClass]="{ 'is-invalid': submitted && f.confirmEmail.errors }"  
+		           id="confirmEmail" formControlName="confirmEmail" pattern="{{ f.email.value }}">
+		  </div>
+		  <div *ngIf="submitted && f.confirmEmail.errors" class="invalid-feedback">
+			<div *ngIf="f.confirmEmail.errors.required">confirm Email is required</div>
+			<div *ngIf="f.confirmEmail.errors.pattern"> Email & Confirm Email does not match</div>
+		</div>
+		  <div class="mb-3">
+		    <label for="password" 
+		           class="form-label">Password</label>
+		    <input type="password" 
+		           name="password" 
+		           class="form-control" formControlName="password"
+				   [ngClass]="{ 'is-invalid': submitted && f.password.errors }" 
+		           id="password">
+			<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+				<div *ngIf="f.password.errors.required">Password is required</div>
+			</div>
+		  </div>
+
+          <div class="mb-3">
+		    <label for="confirmPassword" 
+		           class="form-label">Repeat your password</label>
+		    <input type="password" 
+		           name="confirmPassword" formControlName="confirmPassword"
+		           class="form-control" 
+				   [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" 
+		           id="confirmPassword"
+				   pattern="{{ f.password.value }}">
+			<div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+				<div *ngIf="f.confirmPassword.errors.required">confirm password field is required</div>
+				<div *ngIf="f.confirmPassword.errors.pattern"> Password & Confirm Password does not match.</div>
+			</div>
+		  </div>
+          <div>
+            
+            <re-captcha (resolved)="resolved($event)" 
+                        formControlName="recaptchaReactive" 
+                        siteKey="6LckOIsaAAAAAI-s5pMq8e4kljgotP3t-_wWfSSZ" required>  
+            </re-captcha>
+			<div *ngIf="submitted && f.recaptchaReactive.errors" class="invalid-feedback">
+				<div *ngIf="f.recaptchaReactive.errors.required">recaptchaReactive is required</div>
+			</div>
+          </div>
+		  <div class="mb-3">
+		  <button type="submit" 
+		          class="btn btn-primary"
+				  >CREATE ACCOUNT</button></div>
+		</form>
+</div>
